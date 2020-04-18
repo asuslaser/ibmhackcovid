@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+ <style>
+ 
+ body  {
+  background-image: url("https://3.bp.blogspot.com/-JgkeAcF2gz8/UiAblbCTg_I/AAAAAAAAKRU/8T-B0Jc2aQs/s1600/Background-Web3.jpg");
+  background-color: #cccccc;
+}
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+
+.button5:hover {
+  background-color: #555555;
+  color: white;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+table#t01 {
+  width: 50%;    
+  background-color: black;
+}
+
+</style> 
+
+
+</head>
+
+<body>
+ <div>
+ 
+
+	<h1>COVID CLINIC - Symptoms Analyzer</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<!--<input type="text" name="current_body_temp" placeholder="Current Body Temperature" required="required" /> -->
+	
+		<label for="current_body_temp">Current Body Temperature?</label><br>
+          <select id="current_body_temp" name="current_body_temp" required="required">
+          <option value="90">Below 95 degree Fahrenheit</option>
+          <option value="98">Between 95 to 100 degree Fahrenheit</option>
+          <option value="102">Between 100 to 103 degree Fahrenheit</option>
+          <option value="104">Between 103 to 106 degree Fahrenheit</option>
+		  <option value="107">Above 106 degree Fahrenheit</option>
+         </select>
+
+		 <br>
+		 <br>
+		 
+		 <label for="fever_days">No. of days having Fever?</label><br>
+          <select id="fever_days" name="fever_days" required="required">
+		  <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+		  <option value="5">5</option>
+		  <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+		  <option value="10">10</option>
+         </select>
+		 <br>
+		 <br>
+		 
+		 <label for="cough_days">No. of days having Cough?</label><br>
+          <select id="cough_days" name="cough_days" required="required">
+		  <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+		  <option value="5">5</option>
+		  <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+		  <option value="10">10</option>
+         </select>
+		 <br>
+		 <br>
+		 
+		 <label for="travel_history">Travelled Out of Country in past 30 days?</label><br>
+          <select id="travel_history" name="travel_history" required="required">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+         </select>
+		 <br>
+		 <br>
+		 <label for="age">Age?</label><br>
+          <select id="age" name="age" required="required">
+          <option value="5">Below 10 Years</option>
+          <option value="20">Between 10 to 30 Years</option>
+          <option value="40">Between 30 to 50 Years</option>
+          <option value="60">Between 50 to 70 Years</option>
+		  <option value="80">Above 70 Years</option>
+         </select>
+        <!--<input type="text" name="fever_days" placeholder="No. of days having fever" required="required" />-->
+		<!--<input type="text" name="cough_days" placeholder="No. of days having cough" required="required" />-->
+         <br>
+		 <br>
+		 <label for="medical_ailment">Having any medical ailments (BP, Diabetes etc.,)?</label><br>
+          <select id="medical_ailment" name="v" required="required">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+         </select>
+		 <br>
+		 <br>
+        <button type="submit" class="button button5">Predict Covid Scenario!</button>
+    </form>
+   <br>
+   <br>
+<table id="t01" border=5 align="center">
+  <tr>
+    <th>{{ prediction_text }}</th>
+  </tr>
+</table> 
+
+
+
+
+ </div>
+
+
+</body>
+</html>
